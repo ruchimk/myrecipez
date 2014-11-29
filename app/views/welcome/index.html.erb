@@ -1,0 +1,14 @@
+<h1 class="visuallyhidden">Basic Recipe Search</h1>
+<div class="welcomepage">
+
+<p class="welcome">Welcome to MyRecipez!</p>
+
+
+<%= form_tag("/search_results", method: "get") do %>
+  <%= label_tag(:q, "What are you craving?", :class => "craving") %>
+  <br>
+  <%= text_field_tag(:q, nil, :class => "search_field") %>
+  <br>
+  <%= submit_tag("Basic Recipe Search", :class => "search_button") %>
+<% end %>
+</div>

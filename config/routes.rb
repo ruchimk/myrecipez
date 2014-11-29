@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  root 'welcome#index'
+
   resources :recipes
 
   get 'sessions/new'
@@ -14,7 +16,7 @@ Rails.application.routes.draw do
 
   resources :users
 
-  # get '/users/auth/facebook/callback', to: redirect('/accounts/auth/facebook/callback')
+  get '/users/auth/facebook/callback', to: redirect('/accounts/auth/facebook/callback')
 
 
   # get '/' to: 'recipe#index'
