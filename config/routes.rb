@@ -2,10 +2,6 @@ Rails.application.routes.draw do
 
   root 'welcome#index'
 
-  resources :recipes
-
-  get 'sessions/new'
-
   resources :sessions, only: :create
   get '/signup', to: 'users#new', as: 'signup'
   get '/login', to: 'sessions#new', as: 'login'
@@ -13,8 +9,16 @@ Rails.application.routes.draw do
   get 'auth/:provider/callback', to: 'sessions#create'
   get 'auth/failure', to: redirect('/')
 
+  get '/search_results' => 'recipes#search_results'
+  get '/search_results/:recipe_id' => 'recipes#search_result'
 
-  resources :users
+  resources :users, except: [:index] do
+    resources :recipes
+    get '/grocery_list' => 'grocery_lists#show'
+    patch '/grocery_list' => 'grocery_lists#update'
+  end
+
+ resources :users
 
   get '/users/auth/facebook/callback', to: redirect('/accounts/auth/facebook/callback')
 
