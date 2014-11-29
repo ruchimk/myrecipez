@@ -1,14 +1,21 @@
 Rails.application.routes.draw do
+
   resources :recipes
 
   get 'sessions/new'
 
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
+  resources :sessions, only: :create
+  get '/signup', to: 'users#new', as: 'signup'
+  get '/login', to: 'sessions#new', as: 'login'
+  get '/logout', to: 'sessions#destroy', as: 'logout'
+  get 'auth/:provider/callback', to: 'sessions#create'
+  get 'auth/failure', to: redirect('/')
+
 
   resources :users
-  resources :sessions
+
+  # get '/users/auth/facebook/callback', to: redirect('/accounts/auth/facebook/callback')
+
 
   # get '/' to: 'recipe#index'
 
