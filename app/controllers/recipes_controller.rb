@@ -52,7 +52,6 @@ class RecipesController < ApplicationController
     @recipe[:cuisine] = params[:recipe][:cuisine]
     @recipe[:ingredients] = params[:recipe][:ingredients].split(', ')
     @recipe[:instructions] = params[:recipe][:instructions].split('. ')
-    @recipe[:yield] = params[:recipe][:yield]
     @recipe[:time] = params[:recipe][:time]
     @recipe[:user_id] = params[:user_id]
     @recipe.save
@@ -73,7 +72,6 @@ class RecipesController < ApplicationController
     @recipe_title = response["Recipe"]["Title"]
     @recipe_description = response["Recipe"]["Description"]
     @recipe_cuisine = response["Recipe"]["Cuisine"]
-    @recipe_yield = response["Recipe"]["YieldNumber"].to_s + " " + response["Recipe"]["YieldUnit"].to_s
     @recipe_time = response["Recipe"]["TotalMinutes"]
     @recipe_rating = response["Recipe"]["StarRating"].to_f.round(2)
     @recipe_ingredient_array = response["Recipe"]["Ingredients"]["Ingredient"].map do |ingredient_hash|
