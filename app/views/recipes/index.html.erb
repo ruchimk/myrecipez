@@ -1,0 +1,8 @@
+<div class="usersrecipes">
+<h1><%= @user.name %>'s Recipes</h1>
+
+<% @recipes.each do |recipe| %>
+  <li><%= link_to recipe.title, user_recipe_path(@user,recipe) %></li>
+<% end %>
+
+</div>

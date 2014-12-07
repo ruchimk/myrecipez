@@ -9,13 +9,12 @@ class RecipesController < ApplicationController
     #Search Recipes: http://api.bigoven.com/recipes?title_kw=oysters&pg=1&rpp=20&api_key={your-api-key}
     #Get a recipe: http://api.bigoven.com/recipe/47725?api_key={your-api-key}
     @search_terms = params[:q].gsub(" ", "+")
-    response_hash = HTTParty.get("http://api.bigoven.com/recipe/47725?api_key={API_KEY}")
+    response_hash = HTTParty.get("http://api.bigoven.com/recipes?title_kw=#{@search_terms}&pg=1&rpp=20&api_key=#{API_KEY}")
     @search_results = response_hash["RecipeSearchResult"]["Results"]["RecipeInfo"]
   end
 
   def search_result
     get_json
-
   end
 
   def new
@@ -28,7 +27,7 @@ class RecipesController < ApplicationController
     @recipe[:cuisine] = params["recipe"]["cuisine"]
     @recipe[:ingredients] = params["recipe"]["ingredients"].split("$")
     @recipe[:instructions] = params["recipe"]["instructions"].split("$")
-    @recipe[:yield] = params["recipe"]["yield"]
+    @recipe[:serving_size] = params["recipe"]["serving_size"]
     @recipe[:time] = params["recipe"]["time"]
     @recipe[:user_id] = params[:user_id]
     @recipe.save
@@ -67,7 +66,7 @@ class RecipesController < ApplicationController
 
   def get_json
     @recipe_id = params[:recipe_id]
-    response = HTTParty.get("http://api.bigoven.com/recipes?any_kw=#{@search_terms}&pg=1&rpp=20&api_key=#{API_KEY}")
+    response = HTTParty.get("http://api.bigoven.com/recipes?title_kw=#{@search_terms}&pg=1&rpp=20&api_key=#{API_KEY}")
     @recipe_imageURL = response["Recipe"]["ImageURL"]
     @recipe_title = response["Recipe"]["Title"]
     @recipe_description = response["Recipe"]["Description"]

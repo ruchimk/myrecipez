@@ -1,0 +1,30 @@
+<%= form_for [@user, @recipe] do |f|%>
+  <%= f.label :title, "Recipe name" %>
+  <%= f.text_field "title" %>
+<br>
+  <%= f.label :imageURL, "Paste URL for recipe image" %>
+  <%= f.text_field "imageURL" %>
+<br>
+  <%= f.label :description, "Description:" %>
+  <br>
+  <%= f.text_area "description" %>
+<br>
+  <%= f.label :cuisine %>
+  <%= f.text_field "cuisine" %>
+<br>
+  <%= f.label :ingredients, "List the ingredients here, separated by commas. Don't forget to include amounts and units!" %>
+  <br>
+  <%= f.text_area "ingredients" %>
+<br>
+  <%= f.label :instructions, "Here is where you can clearly list out sentences for the instructions for this recipe." %>
+  <br>
+  <%= f.text_area "instructions" %>
+<br>
+  <%= f.label :serving_size, "How many servings does this provide?" %>
+  <%= f.text_field "servings" %>
+<br>
+  <%= f.label :time, "Total time in minuters" %>
+  <%= f.text_field "time" %>
+<br>
+  <%= f.submit "Save Recipe" %>
+<% end %>

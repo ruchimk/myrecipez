@@ -46,6 +46,8 @@ gem 'omniauth-facebook'
 # gem 'debugger', group: [:development, :test]
 
 group :development, :test do
+    gem 'better_errors'
+  gem "binding_of_caller" # for better_errors
   gem 'pry-rails'
   gem 'rspec-rails', '~> 2.14.0'
   gem 'shoulda-matchers'
