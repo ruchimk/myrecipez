@@ -4,7 +4,6 @@ class RecipesController < ApplicationController
   before_action(:find_recipe, only: [:show, :edit, :update, :destroy])
 
   def search_results
-
     # http://api.bigoven.com/console
     #Search Recipes: http://api.bigoven.com/recipes?title_kw=oysters&pg=1&rpp=20&api_key={your-api-key}
     #Get a recipe: http://api.bigoven.com/recipe/47725?api_key={your-api-key}
@@ -51,6 +50,7 @@ class RecipesController < ApplicationController
     @recipe[:cuisine] = params[:recipe][:cuisine]
     @recipe[:ingredients] = params[:recipe][:ingredients].split(', ')
     @recipe[:instructions] = params[:recipe][:instructions].split('. ')
+    @recipe[:serving_size] = params[:recipe][:serving_size].split('. ')
     @recipe[:time] = params[:recipe][:time]
     @recipe[:user_id] = params[:user_id]
     @recipe.save
@@ -80,7 +80,7 @@ class RecipesController < ApplicationController
   end
 
   def recipe_params
-    params.require(:recipe).permit(:title, :imageURL, :description, :cuisine)
+    params.require(:recipe).permit(:title, :imageURL, :description, :cuisine, :serving_size)
   end
 
   def find_user
